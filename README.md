@@ -2,13 +2,14 @@
 
 This repository creates a busybox image with a full chain from scratch using
 [Buildroot](http://buildroot.uclibc.org).  It was compiled to make use of the
-small size of Busybox with the additional following packages:
+small size of Busybox with the following additional items:
 
-* Internet access
-* Git (1.8.5.3)
+* Internet/networking
+    * IPV4, IPV6, bridge_utils, iproute2, iptables
 * Curl (7.35.0)
+    * protocols: http
 
-My goal was to make a lightweight busybox-based volume-container that had the
+My goal was to make a lightweight busybox-based volume-container that has the
 ability to access other containers/servers/web-locations to grab and update
 configuration. The possibilities are pretty extensive!
 
@@ -17,15 +18,17 @@ configuration. The possibilities are pretty extensive!
 The included `run.sh` should do everything for you, but the steps are as
 follows:
 
-* in `/tarmaker`, the Dockerfile compiles the busybox image inside it's container.
+* in `/tarmaker`, the Dockerfile compiles the busybox image inside it's own
+docker container,
 * the resulting image is run so that we can
-* use `docker cp` to move the rootfs.tar into this repository directory
-* the tar is verified using and then imported
+* use `docker cp` to move the rootfs.tar into this repository directory,
+* then the tar is verified and imported
 
-CAVEAT: At the moment, the script imports the final image in two different
-ways because I think there is a docker bug in calculating the filesize of the
-image. Feel free to edit that last part of the `run.sh` and pick one of the two
-methods.
+## Future Versions
+
+* Compile cURL with support for more protocols
+* Add git back into the build (this was removed due to some serious bugs it
+  introduced into the image)
 
 ### Credits
 
