@@ -1,4 +1,4 @@
-# Dockerfile for busybox+git+curl using buildroot
+# Dockerfile for busybox+curl using buildroot
 FROM        brianclements/ubuntu
 MAINTAINER  Brian Clements <brian@brianclements.net>
 
@@ -30,23 +30,17 @@ RUN         wget --no-check-certificate -nv https://gist.github.com/brianclement
 RUN         wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/curl.mk
 WORKDIR     /tmp/builder/buildroot
 
-# Configure buildroot for x86_64, curl and git
+# Configure buildroot for x86_64, and curl
 RUN         make defconfig
 RUN         sed -i 's/BR2_i386=y/BR2_x86_64=y/' .config
-RUN         sed -i 's/BR2_ARCH="i686"/BR2_ARCH="x86_64"/' .config
-RUN         sed -i 's/BR2_GCC_TARGET_TUNE="i686"/BR2_GCC_TARGET_TUNE="generic"/' .config
-RUN         sed -i 's/BR2_GCC_TARGET_ARCH="i686"/# BR2_GCC_TARGET_ARCH="i686"/' .config
-RUN         sed -i 's/BR2_x86_i686=y/BR2_x86_generic=y/' .config
-RUN         sed -i 's/BR2_UCLIBC_TARGET_ARCH="i386"/BR2_UCLIBC_TARGET_ARCH="x86_64"/' .config
-RUN         sed -i 's/BR2_UCLIBC_X86_TYPE="686"/# BR2_UCLIBC_X86_TYPE="686"/' .config
-RUN         echo BR2_ARCH_IS_64=y >>.config
-RUN         echo BR2_LARGEFILE=y >>.config
-RUN         echo BR2_PACKAGE_GIT=y >>.config
-RUN         echo BR2_PACKAGE_ZLIB=y >>.config
+RUN         echo BR2_TOOLCHAIN_BUILDROOT_LARGEFILE=y >>.config
+RUN         echo BR2_TOOLCHAIN_BUILDROOT_INET_IPV6=y >>.config
+RUN         echo BR2_TOOLCHAIN_BUILDROOT_WCHAR=y >>.config
+RUN         echo BR2_PACKAGE_BRIDGE_UTILS=y >>.config
+RUN         echo BR2_PACKAGE_IPROUTE2=y >>.config
+RUN         echo BR2_PACKAGE_IPTABLES=y >>.config
 RUN         echo BR2_PACKAGE_LIBCURL=y >>.config
 RUN         echo BR2_PACKAGE_CURL=y >>.config
-RUN         echo BR2_PACKAGE_LIBICONV=y >>.config
-RUN         echo BR2_TOOLCHAIN_BUILDROOT_LARGEFILE=y >>.config
 RUN         make olddefconfig
 
 RUN         make --quiet
