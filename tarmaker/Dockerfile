@@ -45,15 +45,7 @@ RUN         make olddefconfig
 
 RUN         make --quiet
 
-# Replace some symlinks in the image with empty files for Docker to bind-mount to
-WORKDIR     /tmp/builder/buildroot/output/images
-RUN         mkdir extra extra/etc extra/sbin
-RUN         touch extra/etc/resolv.conf
-RUN         touch extra/sbin/init
-RUN         cp rootfs.tar rootfs-updated.tar
-RUN         tar rvf rootfs-updated.tar -C extra .
-
 # Done!
-RUN         cp /tmp/builder/buildroot/output/images/rootfs-updated.tar /tmp/rootfs.tar
+RUN         cp /tmp/builder/buildroot/output/images/rootfs.tar /tmp/rootfs.tar
 WORKDIR     /tmp
 RUN         md5sum rootfs.tar > rootfs.tar.md5
