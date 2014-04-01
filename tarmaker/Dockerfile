@@ -41,6 +41,9 @@ RUN         echo BR2_PACKAGE_IPROUTE2=y >>.config
 RUN         echo BR2_PACKAGE_IPTABLES=y >>.config
 RUN         echo BR2_PACKAGE_LIBCURL=y >>.config
 RUN         echo BR2_PACKAGE_CURL=y >>.config
+RUN         echo BR2_PACKAGE_OPENSSL=y >>.config
+RUN         echo BR2_PACKAGE_OPENSSL_BIN=y >>.config
+RUN         echo BR2_PACKAGE_OPENSSL_ENGINES=y >>.config
 RUN         make olddefconfig
 
 RUN         make --quiet
