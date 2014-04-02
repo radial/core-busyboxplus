@@ -4,10 +4,14 @@ This repository creates a busybox image with a full chain from scratch using
 [Buildroot](http://buildroot.uclibc.org).  It was compiled to make use of the
 small size of Busybox with the following additional items:
 
+* System
+    * Wide character support
 * Internet/networking
     * IPV4, IPV6, bridge_utils, iproute2, iptables
+    * OpenSSL (1.0.1f)
 * Curl (7.35.0)
-    * protocols: http
+    * Protocols: dict file ftp ftps gopher http https imap imaps pop3 pop3s rtsp smtp smtps telnet tftp 
+    * Features: IPv6 Largefile NTLM SSL libz TLS-SRP
 
 My goal was to make a lightweight busybox-based volume-container that has the
 ability to access other containers/servers/web-locations to grab and update
@@ -24,9 +28,8 @@ docker container,
 * use `docker cp` to move the rootfs.tar into this repository directory,
 * then the tar is verified and imported
 
-## Future Versions
+### Future Versions
 
-* Compile cURL with support for more protocols
 * Add git back into the build (this was removed due to some serious bugs it
   introduced into the image)
 
