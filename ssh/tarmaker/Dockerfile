@@ -1,4 +1,4 @@
-# Dockerfile for busybox+curl using buildroot
+# Dockerfile for busybox+ssh using buildroot
 FROM        brianclements/ubuntu
 MAINTAINER  Brian Clements <brian@brianclements.net>
 
@@ -30,7 +30,7 @@ RUN         wget --no-check-certificate -nv https://gist.github.com/brianclement
 RUN         wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/curl.mk
 WORKDIR     /tmp/builder/buildroot
 
-# Configure buildroot for x86_64, and curl
+# Configure base buildroot image
 RUN         make defconfig
 RUN         sed -i 's/BR2_i386=y/BR2_x86_64=y/' .config
 RUN         echo BR2_TOOLCHAIN_BUILDROOT_LARGEFILE=y >>.config
@@ -39,7 +39,7 @@ RUN         echo BR2_TOOLCHAIN_BUILDROOT_WCHAR=y >>.config
 RUN         echo BR2_PACKAGE_BRIDGE_UTILS=y >>.config
 RUN         echo BR2_PACKAGE_IPROUTE2=y >>.config
 RUN         echo BR2_PACKAGE_IPTABLES=y >>.config
-
+# Add image flavor
 RUN         echo BR2_PACKAGE_OPENSSH=y >>.config
 RUN         make oldconfig
 
