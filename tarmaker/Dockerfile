@@ -44,6 +44,7 @@ RUN         echo BR2_PACKAGE_CURL=y >>.config
 RUN         echo BR2_PACKAGE_OPENSSL=y >>.config
 RUN         echo BR2_PACKAGE_OPENSSL_BIN=y >>.config
 RUN         echo BR2_PACKAGE_OPENSSL_ENGINES=y >>.config
+RUN         echo BR2_package_OPENSSH=y >>.config
 RUN         make olddefconfig
 
 RUN         make --quiet
