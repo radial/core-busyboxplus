@@ -42,6 +42,8 @@ RUN         echo BR2_PACKAGE_IPTABLES=y >>.config
 # Add image flavor
 RUN         echo BR2_PACKAGE_LIBCURL=y >>.config
 RUN         echo BR2_PACKAGE_CURL=y >>.config
+RUN         echo BR2_PACKAGE_OPENSSL=y >>.config
+RUN         echo BR2_PACKAGE_LIBSSH2=y >>.config
 RUN         make oldconfig
 
 RUN         make --quiet
