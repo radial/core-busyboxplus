@@ -8,8 +8,9 @@ small size of Busybox with the following additional items:
     * Wide character support
 * Internet/networking
     * IPV4, IPV6, bridge_utils, iproute2, iptables
-    * OpenSSL (1.0.1f)
-* Curl (7.35.0)
+
+In addition to the above, this repository builds the additional flavor of Busybox:
+* Curl (7.35.0), built with OpenSSL (1.0.1f) and Libssh2 (1.4.3)
     * Protocols: dict file ftp ftps gopher http https imap imaps pop3 pop3s rtsp smtp smtps telnet tftp 
     * Features: IPv6 Largefile NTLM SSL libz TLS-SRP
 
@@ -22,10 +23,13 @@ configuration. The possibilities are pretty extensive!
 The included `run.sh` should do everything for you, but the steps are as
 follows:
 
-* in `/tarmaker`, the Dockerfile compiles the busybox image inside it's own
-docker container,
+* `sudo -i` so you don't have to babysit your sudo password timeout throughout
+  all the steps.
+* run script and select your flavor build: `./run.sh curl`
+* the script selects the `/tarmaker` of your choice and the Dockerfile compiles
+  the busybox image inside it's own docker container,
 * the resulting image is run so that we can
-* use `docker cp` to move the rootfs.tar into this repository directory,
+* use `docker cp` to move the rootfs.tar into the flavor directory,
 * then the tar is verified and imported
 
 ### Future Versions
