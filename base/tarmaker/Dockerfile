@@ -23,13 +23,6 @@ RUN         tar -zxf buildroot-$BR_VERSION.tar.gz
 RUN         mv buildroot-$BR_VERSION buildroot
 WORKDIR     /tmp/builder/buildroot
 
-# Add the curl information
-RUN         mkdir -p package/curl
-WORKDIR     /tmp/builder/buildroot/package/curl
-RUN         wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/Config.in 
-RUN         wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/curl.mk
-WORKDIR     /tmp/builder/buildroot
-
 # Configure base buildroot image
 RUN         make defconfig
 RUN         sed -i 's/BR2_i386=y/BR2_x86_64=y/' .config
