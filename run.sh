@@ -10,17 +10,25 @@
         exit 1
     }
 
-sudo docker build -t tarmaker $1/tarmaker || {
+sudo docker build -t tarmaker:$1 $1/tarmaker || {
     echo "Something went wrong. Aborting."
         exit 1
     }
 
-[ -f rootfs.tar ] && mv rootfs.tar rootfs.tar.old
-[ -f rootfs.tar.md5 ] && mv rootfs.tar.md5 rootfs.tar.md5.old
+[ -f $1/tarmaker/rootfs.tar ] && mv $1/tarmaker/rootfs.tar $1/tarmaker/rootfs.tar.old
+[ -f $1/tarmaker/rootfs.tar.md5 ] && mv $1/tarmaker/rootfs.tar.md5 $1/tarmaker/rootfs.tar.md5.old
 
-sudo docker run --name builder tarmaker
-sudo docker cp builder:/tmp/rootfs.tar $1
-sudo docker cp builder:/tmp/rootfs.tar.md5 $1
+sudo docker run --name builder-$1 tarmaker:$1
+sudo docker cp builder-$1:/tmp/rootfs.tar $1
+sudo docker cp builder-$1:/tmp/rootfs.tar.md5 $1
+
 cd $1
-md5sum --check rootfs.tar.md5
-sudo docker build -t brianclements/busyboxplus:$1 $1
+if md5sum --check rootfs.tar.md5; then
+    sudo docker rm -f builder-$1 && sudo docker rmi tarmaker:$1
+else
+    echo "Checksum failed. Aborting."
+    echo "Note: the tarmaker:$1 image and builder-$1 container have not been deleted."
+    exit 1
+fi
+
+sudo docker build -t brianclements/busyboxplus:$1 .
