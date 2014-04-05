@@ -1,6 +1,6 @@
 ## Dockerfile for Busyboxplus
 
-This repository creates a busybox image with a full chain from scratch using
+This repository creates a busybox image with a full-chain from scratch using
 [Buildroot](http://buildroot.uclibc.org).  It was compiled to make use of the
 small size of Busybox with the following additional items for a "base" image:
 
@@ -17,7 +17,7 @@ of Busybox:
       scp sftp smtp smtps telnet tftp 
     * Features: IPv6 Largefile NTLM SSL libz TLS-SRP
 
-My goal was to make a lightweight busybox-based volume-containers that have the
+My goal was to make lightweight busybox-based volume-containers that have the
 ability to access other containers/servers/web-locations to grab and update
 configuration using these various cannonical tools. The possibilities are pretty
 extensive!
@@ -36,11 +36,15 @@ follows:
 * use `docker cp` to move the rootfs.tar into the flavor directory,
 * then the tar is verified and imported
 
-### Future Versions
+### Future Flavor Additions
 
-* Add git back into the build (this was removed due to some serious bugs it
-  introduced into the image)
+* Git. This was removed due to some serious issues it introduced into the
+  image). See bugs [#1][1] and [#2][2]
+* SSH server/client. Possibly for stand-alone purposes, and possibly as a
+  feature for remote git management.
 
+[1]: https://github.com/brianclements/dockerfile-busyboxplus/issues/1
+[2]: https://github.com/brianclements/dockerfile-busyboxplus/issues/2
 ### Credits
 
 Much thanks to [Jérôme Petazzoni](https://github.com/jpetazzo) for [this
