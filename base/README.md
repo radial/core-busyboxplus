@@ -10,12 +10,14 @@ small size of Busybox with the following items:
     * IPV4, IPV6, bridge_utils, iproute2, iptables
 
 Other busyboxplus flavors include:
-* Busyboxplus-cURL
 
+* [Busyboxplus-cURL][1]
+
+[1]: https://index.docker.io/u/brianclements/busyboxplus-curl
 More coming soon...
 
 ### Source
 
-The tarbuilders used to create this image can be found [here][1]
+The tarbuilders used to create this image can be found [here][2]
 
-[1]: https://github.com/brianclements/dockerfile-busyboxplus
+[2]: https://github.com/brianclements/dockerfile-busyboxplus
