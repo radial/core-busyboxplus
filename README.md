@@ -2,7 +2,7 @@
 
 This repository creates a busybox image with a full-chain from scratch using
 [Buildroot](http://buildroot.uclibc.org).  It was compiled to make use of the
-small size of Busybox with the following additional items for a "base" image:
+small size of Busybox with the following items for a "base" image:
 
 * System
     * Wide character support
@@ -11,6 +11,7 @@ small size of Busybox with the following additional items for a "base" image:
 
 In addition to the above, this repository can build the following "curl" flavor
 of Busybox:
+
 * Curl (7.35.0)/libcurl (7.35.0), built with OpenSSL (1.0.1f), zlib (1.2.8), and
   Libssh2 (1.4.3)
     * Protocols: dict file ftp ftps gopher http https imap imaps pop3 pop3s rtsp
