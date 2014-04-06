@@ -1,6 +1,6 @@
-## Dockerfile for Busyboxplus
+## Dockerfiles for Busyboxplus Builders
 
-This repository creates a busybox image with a full-chain from scratch using
+This repository creates busybox images with a full-chains from scratch using
 [Buildroot](http://buildroot.uclibc.org).  It was compiled to make use of the
 small size of Busybox with the following items for a "base" image:
 
