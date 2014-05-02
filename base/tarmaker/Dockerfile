@@ -1,5 +1,5 @@
 # Dockerfile for busybox using buildroot
-FROM        brianclements/ubuntu
+FROM        radial/distro
 MAINTAINER  Brian Clements <brian@brianclements.net>
 
 # Update and create temp directories
