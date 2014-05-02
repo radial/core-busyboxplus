@@ -31,4 +31,4 @@ else
     exit 1
 fi
 
-sudo docker build -t brianclements/busyboxplus:$1 .
+sudo docker build -t busyboxplus:$1 .
