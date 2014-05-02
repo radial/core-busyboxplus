@@ -1,1 +1,3 @@
-rootfs.tar binary
+base/rootfs.tar binary
+curl/rootfs.tar binary
+git/rootfs.tar binary
