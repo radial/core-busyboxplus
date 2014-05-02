@@ -4,8 +4,15 @@ MAINTAINER  Brian Clements <radial@brianclements.net>
 
 # Update and create temp directories
 ENV DEBIAN_FRONTEND noninteractive
-RUN         apt-get -q update
-RUN         apt-get -qy install wget build-essential libncurses-dev rsync unzip bc gnupg python
+RUN         apt-get -q update && apt-get -qyV install \
+            wget \
+            build-essential \
+            libncurses-dev \
+            rsync \
+            unzip \
+            bc \
+            gnupg \
+            python
 RUN         mkdir -p /tmp/builder
 RUN         env --unset=DEBIAN_FRONTEND
 WORKDIR     /tmp/builder
