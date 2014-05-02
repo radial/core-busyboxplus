@@ -1,6 +1,6 @@
 # Dockerfile for busybox using buildroot
 FROM        radial/distro
-MAINTAINER  Brian Clements <brian@brianclements.net>
+MAINTAINER  Brian Clements <radial@brianclements.net>
 
 # Update and create temp directories
 ENV DEBIAN_FRONTEND noninteractive
