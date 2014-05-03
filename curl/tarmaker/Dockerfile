@@ -2,7 +2,7 @@
 FROM        radial/distro
 MAINTAINER  Brian Clements <radial@brianclements.net>
 
-# Update and create temp directories
+# Install packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN         apt-get -q update && apt-get -qyV install \
             wget \
@@ -13,46 +13,54 @@ RUN         apt-get -q update && apt-get -qyV install \
             bc \
             gnupg \
             python
-RUN         mkdir -p /tmp/builder
 RUN         env --unset=DEBIAN_FRONTEND
+
+# Create directories
+RUN         mkdir -p /tmp/builder
 WORKDIR     /tmp/builder
 
 # Retrieve files and check authenticity
 ENV BR_VERSION 2014.02
-RUN         wget -nv http://buildroot.uclibc.org/downloads/buildroot-$BR_VERSION.tar.gz
-RUN         wget -nv http://buildroot.uclibc.org/downloads/buildroot-$BR_VERSION.tar.gz.sign
-RUN         wget -nv http://uclibc.org/~jacmet/pubkey.gpg
-RUN         gpg --import pubkey.gpg
-RUN         gpg --verify buildroot-$BR_VERSION.tar.gz.sign
+RUN         wget -nv http://buildroot.uclibc.org/downloads/buildroot-$BR_VERSION.tar.gz &&\
+            wget -nv http://buildroot.uclibc.org/downloads/buildroot-$BR_VERSION.tar.gz.sign &&\
+            wget -nv http://uclibc.org/~jacmet/pubkey.gpg &&\
+            gpg --import pubkey.gpg &&\
+            gpg --verify buildroot-$BR_VERSION.tar.gz.sign
 
 # Extract
-RUN         tar -zxf buildroot-$BR_VERSION.tar.gz
-RUN         mv buildroot-$BR_VERSION buildroot
+RUN         tar -zxf buildroot-$BR_VERSION.tar.gz &&\
+            mv buildroot-$BR_VERSION buildroot
 WORKDIR     /tmp/builder/buildroot
 
 # Add the curl information
 RUN         mkdir -p package/curl
 WORKDIR     /tmp/builder/buildroot/package/curl
-RUN         wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/Config.in 
-RUN         wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/curl.mk
+RUN         wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/Config.in &&\
+            wget --no-check-certificate -nv https://gist.github.com/brianclements/9802627/raw/curl.mk
 WORKDIR     /tmp/builder/buildroot
 
 # Configure base buildroot image
 RUN         make defconfig
-RUN         sed -i 's/BR2_i386=y/BR2_x86_64=y/' .config
-RUN         echo BR2_TOOLCHAIN_BUILDROOT_LARGEFILE=y >>.config
-RUN         echo BR2_TOOLCHAIN_BUILDROOT_INET_IPV6=y >>.config
-RUN         echo BR2_TOOLCHAIN_BUILDROOT_WCHAR=y >>.config
-RUN         echo BR2_PACKAGE_BRIDGE_UTILS=y >>.config
-RUN         echo BR2_PACKAGE_IPROUTE2=y >>.config
-RUN         echo BR2_PACKAGE_IPTABLES=y >>.config
+
+# Add base config
+RUN         sed -i 's/BR2_i386=y/BR2_x86_64=y/' .config &&\
+            echo BR2_TOOLCHAIN_BUILDROOT_LARGEFILE=y >>.config &&\
+            echo BR2_TOOLCHAIN_BUILDROOT_INET_IPV6=y >>.config &&\
+            echo BR2_TOOLCHAIN_BUILDROOT_WCHAR=y >>.config &&\
+            echo BR2_PACKAGE_BRIDGE_UTILS=y >>.config &&\
+            echo BR2_PACKAGE_IPROUTE2=y >>.config &&\
+            echo BR2_PACKAGE_IPTABLES=y >>.config
+
 # Add image flavor
-RUN         echo BR2_PACKAGE_LIBCURL=y >>.config
-RUN         echo BR2_PACKAGE_CURL=y >>.config
-RUN         echo BR2_PACKAGE_OPENSSL=y >>.config
-RUN         echo BR2_PACKAGE_LIBSSH2=y >>.config
+RUN         echo BR2_PACKAGE_LIBCURL=y >>.config &&\
+            echo BR2_PACKAGE_CURL=y >>.config &&\
+            echo BR2_PACKAGE_OPENSSL=y >>.config &&\
+            echo BR2_PACKAGE_LIBSSH2=y >>.config
+
+# Reformat config and prep for make            
 RUN         make oldconfig
 
+# Make
 RUN         make --quiet
 
 # Done!
