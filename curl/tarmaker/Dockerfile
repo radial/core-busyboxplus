@@ -46,13 +46,14 @@ RUN         make defconfig
 RUN         sed -i 's/BR2_i386=y/BR2_x86_64=y/' .config &&\
             echo BR2_TOOLCHAIN_BUILDROOT_LARGEFILE=y >>.config &&\
             echo BR2_TOOLCHAIN_BUILDROOT_INET_IPV6=y >>.config &&\
-            echo BR2_TOOLCHAIN_BUILDROOT_WCHAR=y >>.config &&\
+            echo BR2_TOOLCHAIN_BUILDROOT_WCHAR=y >>.config
 
 # Add image flavor
 RUN         echo BR2_PACKAGE_LIBCURL=y >>.config &&\
             echo BR2_PACKAGE_CURL=y >>.config &&\
             echo BR2_PACKAGE_OPENSSL=y >>.config &&\
-            echo BR2_PACKAGE_LIBSSH2=y >>.config
+            echo BR2_PACKAGE_LIBSSH2=y >>.config &&\
+            echo BR2_PACKAGE_CA_CERTIFICATES=y >>.config
 
 # Reformat config and prep for make            
 RUN         make oldconfig
