@@ -1,4 +1,4 @@
 FROM        scratch
-MAINTAINER  Brian Clements <brian@brianclements.net>
+MAINTAINER  Brian Clements <radial@brianclements.net>
 ADD         rootfs.tar /
-CMD         /bin/sh
+CMD         ["/bin/sh"]
