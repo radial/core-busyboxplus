@@ -1,8 +1,9 @@
 ## Busyboxplus Base Image
 
 This repository creates a busybox image with a full-chain from scratch using
-[Buildroot](http://buildroot.uclibc.org).  It was compiled to make use of the
-small size of Busybox with the following items:
+[Buildroot](http://buildroot.uclibc.org). It is part of the
+[Radial](https://github.com/radial) suite of images and tools and was compiled
+to make use of the small size of Busybox with the following items:
 
 * System
     * Wide character support
@@ -11,13 +12,21 @@ small size of Busybox with the following items:
 
 Other busyboxplus flavors include:
 
-* [Busyboxplus-cURL][1]
+* [Busyboxplus-cURL][bbcurl]
+* [Busyboxplus-git][bbgit]
 
-[1]: https://index.docker.io/u/brianclements/busyboxplus-curl
-More coming soon...
+My goal was to make lightweight busybox-based volume-containers solely for
+managing the configuration for other containers that actually run the
+application, or "Axle" containers. The configuration containers, or "Hub"
+containers, have the ability to access other containers/servers/web-locations to
+grab and update that configuration using these various cannonical tools. The
+possibilities are pretty extensive!
+
+[bbcurl]: https://index.docker.io/u/radial/busyboxplus-curl
+[bbgit]: https://index.docker.io/u/radial/busyboxplus-git
 
 ### Source
 
-The tarbuilders used to create this image can be found [here][2]
+The tarbuilders used to create these images can be found [here][repo]
 
-[2]: https://github.com/brianclements/dockerfile-busyboxplus
+[repo]: https://github.com/radial/core-busyboxplus
