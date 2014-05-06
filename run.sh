@@ -21,14 +21,16 @@ sudo docker build -t tarmaker:$1 $1/tarmaker || {
 sudo docker run --name builder-$1 tarmaker:$1
 sudo docker cp builder-$1:/tmp/rootfs.tar $1
 sudo docker cp builder-$1:/tmp/rootfs.tar.md5 $1
+sudo chown 1000:1000 $1/rootfs.tar.md5
 
 cd $1
 if md5sum --check rootfs.tar.md5; then
-    sudo docker rm -f builder-$1 && sudo docker rmi tarmaker:$1
+    sudo docker rm -f builder-$1 &&\
+    sudo docker rmi tarmaker:$1 &&\
+    # We must wait until all removal is done before next step
+    sudo docker build -t busyboxplus:$1 .
 else
     echo "Checksum failed. Aborting."
     echo "Note: the tarmaker:$1 image and builder-$1 container have not been deleted."
     exit 1
 fi
-
-sudo docker build -t busyboxplus:$1 .
