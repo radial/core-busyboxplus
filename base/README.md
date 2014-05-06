@@ -7,7 +7,7 @@ small size of Busybox with the following items:
 * System
     * Wide character support
 * Internet/networking
-    * IPV4, IPV6, bridge_utils, iproute2, iptables
+    * IPV4, IPV6
 
 Other busyboxplus flavors include:
 

@@ -7,7 +7,7 @@ use of the small size of Busybox with the following items:
 * System
     * Wide character support
 * Internet/networking
-    * IPV4, IPV6, bridge_utils, iproute2, iptables
+    * IPV4, IPV6
 * Curl (7.35.0)/libcurl (7.35.0), built with OpenSSL (1.0.1f), zlib (1.2.8), and
   Libssh2 (1.4.3)
     * Protocols: dict file ftp ftps gopher http https imap imaps pop3 pop3s rtsp
