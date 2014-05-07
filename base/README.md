@@ -12,7 +12,7 @@ to make use of the small size of Busybox with the following items:
 
 Other busyboxplus flavors include:
 
-* [Busyboxplus-cURL][bbcurl]
+* [Busyboxplus-curl][bbcurl]
 * [Busyboxplus][bbplus]
 
 My goal was to make lightweight busybox-based volume-containers solely for
