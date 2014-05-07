@@ -17,8 +17,8 @@ to make use of the small size of Busybox with the following items:
 
 Other busyboxplus flavors include:
 
-* [Busyboxplus][bb]
-* [Busyboxplus-git][bbgit]
+* [Busybox][bb]
+* [Busyboxplus][bbplus]
 
 My goal was to make lightweight busybox-based volume-containers solely for
 managing the configuration for other containers that actually run the
@@ -27,8 +27,8 @@ containers, have the ability to access other containers/servers/web-locations to
 grab and update that configuration using these various cannonical tools. The
 possibilities are pretty extensive!
 
-[bb]: https://index.docker.io/u/radial/busyboxplus
-[bbgit]: https://index.docker.io/u/radial/busyboxplus-git
+[bb]: https://index.docker.io/u/radial/busybox
+[bbplus]: https://index.docker.io/u/radial/busyboxplus
 
 ### Source
 

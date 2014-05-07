@@ -1,7 +1,7 @@
 ## Busyboxplus Git Image
 
-This repository creates a git enabled busybox image with a full-chain from
-scratch using [Buildroot](http://buildroot.uclibc.org). It is part of the
+This repository creates a git and cURL enabled busybox image with a full-chain
+from scratch using [Buildroot](http://buildroot.uclibc.org). It is part of the
 [Radial](https://github.com/radial) suite of images and tools and was compiled
 to make use of the small size of Busybox with the following items:
 
@@ -9,6 +9,13 @@ to make use of the small size of Busybox with the following items:
     * Wide character support
 * Internet/networking
     * IPV4, IPV6
+* Curl (7.35.0)/libcurl (7.35.0), built with OpenSSL (1.0.1f, includes
+  ca-certificates), zlib (1.2.8), and Libssh2 (1.4.3)
+    * Protocols: dict file ftp ftps gopher http https imap imaps pop3 pop3s rtsp
+      scp sftp smtp smtps telnet tftp 
+    * Features: IPv6 Largefile NTLM SSL libz TLS-SRP
+    * Git requires cURL anyway for http/s support, so included the full build of
+      it.
 * Git (1.8.3.5)
     * built with OpenSSL (1.0.1f, includes ca-certificates) and zlib (1.2.8) 
     * Protocols: local, git, http, https, (no SSH)
@@ -26,7 +33,7 @@ to make use of the small size of Busybox with the following items:
 
 Other busyboxplus flavors include:
 
-* [Busyboxplus][bb]
+* [Busybox][bb]
 * [Busyboxplus-curl][bbcurl]
 
 My goal was to make lightweight busybox-based volume-containers solely for
@@ -36,7 +43,7 @@ containers, have the ability to access other containers/servers/web-locations to
 grab and update that configuration using these various cannonical tools. The
 possibilities are pretty extensive!
 
-[bb]: https://index.docker.io/u/radial/busyboxplus
+[bb]: https://index.docker.io/u/radial/busybox
 [bbcurl]: https://index.docker.io/u/radial/busyboxplus-curl
 
 ### Source

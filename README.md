@@ -25,6 +25,13 @@ flavors:
 
 **Git**
 
+* Curl (7.35.0)/libcurl (7.35.0), built with OpenSSL (1.0.1f, includes
+  ca-certificates), zlib (1.2.8), and Libssh2 (1.4.3)
+    * Protocols: dict file ftp ftps gopher http https imap imaps pop3 pop3s rtsp
+      scp sftp smtp smtps telnet tftp 
+    * Features: IPv6 Largefile NTLM SSL libz TLS-SRP
+    * Git requires cURL anyway for http/s support, so included the full build of
+      it.
 * Git (1.8.3.5)
     * built with OpenSSL (1.0.1f, includes ca-certificates) and zlib (1.2.8) 
     * Protocols: local, git, http, https, (no SSH)
@@ -39,7 +46,6 @@ flavors:
       svn support, and some others can be easily added back in at a cost of
       about 0.5 - 1mb of image size per item. Feel free to reach out with
       requests for custom git builds if it suites your workflow.
-
 
 My goal was to make lightweight busybox-based volume-containers solely for
 managing the configuration for other containers that actually run the

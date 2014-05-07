@@ -13,7 +13,7 @@ to make use of the small size of Busybox with the following items:
 Other busyboxplus flavors include:
 
 * [Busyboxplus-cURL][bbcurl]
-* [Busyboxplus-git][bbgit]
+* [Busyboxplus][bbplus]
 
 My goal was to make lightweight busybox-based volume-containers solely for
 managing the configuration for other containers that actually run the
@@ -23,7 +23,7 @@ grab and update that configuration using these various cannonical tools. The
 possibilities are pretty extensive!
 
 [bbcurl]: https://index.docker.io/u/radial/busyboxplus-curl
-[bbgit]: https://index.docker.io/u/radial/busyboxplus-git
+[bbplus]: https://index.docker.io/u/radial/busyboxplus
 
 ### Source
 
