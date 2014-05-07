@@ -21,7 +21,7 @@ sudo docker build -t tarmaker:$1 $1/tarmaker || {
 sudo docker run --name builder-$1 tarmaker:$1
 sudo docker cp builder-$1:/tmp/rootfs.tar $1
 sudo docker cp builder-$1:/tmp/rootfs.tar.md5 $1
-sudo chown 1000:1000 $1/rootfs.tar.md5
+sudo chown 1000:1000 $1/rootfs*
 
 cd $1
 if md5sum --check rootfs.tar.md5; then
