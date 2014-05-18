@@ -31,17 +31,22 @@ to make use of the small size of Busybox with the following items:
       0.5 - 1mb of image size per item. Feel free to reach out with requests for
       custom git builds.
 
+My goal was to make lightweight busybox-based volume-containers solely for
+managing the configuration "Hub" containers and shared/bind-mounted volume
+"Axle" containers for the container that actually runs the application, or
+"Spoke" container. 
+
+Hub containers have the ability to access other containers/servers/web-locations
+to grab and update configuration using git and/or cURL. The possibilities are
+pretty extensive!
+
+This is the default Hub container image. It includes both git and cURL and
+weighs in at about 12.86mb.
+
 Other busyboxplus flavors include:
 
 * [Busybox][bb]
 * [Busyboxplus-curl][bbcurl]
-
-My goal was to make lightweight busybox-based volume-containers solely for
-managing the configuration for other containers that actually run the
-application, or "Axle" containers. The configuration containers, or "Hub"
-containers, have the ability to access other containers/servers/web-locations to
-grab and update that configuration using these various cannonical tools. The
-possibilities are pretty extensive!
 
 [bb]: https://index.docker.io/u/radial/busybox
 [bbcurl]: https://index.docker.io/u/radial/busyboxplus-curl

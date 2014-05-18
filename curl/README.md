@@ -15,17 +15,25 @@ to make use of the small size of Busybox with the following items:
       scp sftp smtp smtps telnet tftp 
     * Features: IPv6 Largefile NTLM SSL libz TLS-SRP
 
+My goal was to make lightweight busybox-based volume-containers solely for
+managing the configuration "Hub" containers and shared/bind-mounted volume
+"Axle" containers for the container that actually runs the application, or
+"Spoke" container. 
+
+Hub containers have the ability to access other containers/servers/web-locations
+to grab and update configuration using git and/or cURL. The possibilities are
+pretty extensive!
+
+The default Hub container image is [busyboxplus][bbplus] which includes both
+cURL and git. This image was created as an alternate for those only needing to
+use cURL to extract their configuration in their Hub containers. This image, at
+4.23mb, is a significant size savings over [busyboxplus][bbplus] which is
+around 12.86mb.
+
 Other busyboxplus flavors include:
 
 * [Busybox][bb]
 * [Busyboxplus][bbplus]
-
-My goal was to make lightweight busybox-based volume-containers solely for
-managing the configuration for other containers that actually run the
-application, or "Axle" containers. The configuration containers, or "Hub"
-containers, have the ability to access other containers/servers/web-locations to
-grab and update that configuration using these various cannonical tools. The
-possibilities are pretty extensive!
 
 [bb]: https://index.docker.io/u/radial/busybox
 [bbplus]: https://index.docker.io/u/radial/busyboxplus
