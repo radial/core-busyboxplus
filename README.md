@@ -68,11 +68,6 @@ follows:
 * use `docker cp` to move the rootfs.tar into the flavor directory,
 * then the tar is verified and imported
 
-### Future Flavor Additions
-
-* SSH server/client. Possibly for stand-alone purposes, and possibly as a
-  feature for remote git management.
-
 ### Credits
 
 Much thanks to:
