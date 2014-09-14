@@ -1,5 +1,5 @@
 # Dockerfile for busybox+curl using buildroot
-FROM            radial/distro
+FROM            radial/distro:us-west-1
 MAINTAINER      Brian Clements <radial@brianclements.net>
 
 # Install packages
